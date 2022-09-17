@@ -1,0 +1,1 @@
+export function translator(text: string): string
