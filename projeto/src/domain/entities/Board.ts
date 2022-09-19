@@ -9,7 +9,7 @@ export class Board {
      */
     columns: Column[]
     
-    constructor(readonly name: string, readonly description: string){
+    constructor(public idBoard: number, readonly name: string, readonly description: string){
         this.columns = []
     }
 

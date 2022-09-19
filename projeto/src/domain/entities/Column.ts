@@ -1,7 +1,7 @@
 import { Card } from "./Card";
 
 export class Column {
-    private cards: Card[]
+    cards: Card[]
     constructor(readonly name: string, readonly hasEstimative: boolean){
         this.cards = []
     }
