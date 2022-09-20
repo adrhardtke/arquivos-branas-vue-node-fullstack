@@ -7,7 +7,7 @@ import { Board } from "../../src/domain/entities/Board"
 describe("ExportCards", () => {
     test("Deve exportar os cards", async () => {
         const boardRepository = new BoardRepositoryMemory()
-        const board = new Board(1, "A", "desc")
+        const board = new Board(1, "A")
         board.addColumn('todo', true)
         board.addColumn('doing', true)
         board.addColumn('done', false)

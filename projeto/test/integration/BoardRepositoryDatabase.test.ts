@@ -1,17 +1,20 @@
 import { Board } from "../../src/domain/entities/Board"
+import PgPromiseConnection from "../../src/infra/database/PgPromiseConnection"
+import BoardRepositoryDatabase from "../../src/infra/repositories/database/BoardRepositoryDatabase"
 import BoardRepositoryMemory from "../../src/infra/repositories/memory/BoardRepositoryMemory"
 
-describe('BoardRepositoryMemory', () => {
+describe('BoardRepositoryDatabase', () => {
     it('deve salvar um board', async () => {
-        const boardRepository = new BoardRepositoryMemory()
-        const board = new Board(1, "A")
+        const connection = new PgPromiseConnection()
+        const boardRepository = new BoardRepositoryDatabase(connection)
+        const board = new Board(null, "A")
         board.addColumn('todo', true)
         board.addColumn('doing', true)
         board.addColumn('done', false)
         const idBoard = await boardRepository.save(board)
-        expect(idBoard).toBe(1)
+        expect(idBoard).toBeGreaterThan(1)
     })
-    it('deve consultar um board', async () => {
+    it.skip('deve consultar um board', async () => {
         const boardRepository = new BoardRepositoryMemory()
         const board = new Board(1, "A")
         board.addColumn('todo', true)
@@ -22,7 +25,7 @@ describe('BoardRepositoryMemory', () => {
         expect(existingBoard).toBe(board)
         expect(existingBoard?.columns).toHaveLength(3)
     })
-    it('deve atualizar um board', async () => {
+    it.skip('deve atualizar um board', async () => {
         const boardRepository = new BoardRepositoryMemory()
         const board = new Board(1, "A")
         board.addColumn('todo', true)

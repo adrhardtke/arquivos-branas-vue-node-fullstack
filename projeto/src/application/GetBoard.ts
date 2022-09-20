@@ -23,7 +23,7 @@ export default class GetBoard {
 }
 
 type Output = {
-    idBoard: number,
+    idBoard: number | null,
     cards: {
         name: string,
         estimative: number

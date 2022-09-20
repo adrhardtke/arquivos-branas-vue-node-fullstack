@@ -22,6 +22,7 @@ export default class BoardRepositoryMemory implements BoardRepository {
         return board
     }
     async update(board: Board): Promise<void> {
+        if(!board.idBoard) throw new Error("Board does not exists")
         await this.delete(board.idBoard)
         this.save(board)
     }

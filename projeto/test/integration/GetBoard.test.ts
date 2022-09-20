@@ -5,7 +5,7 @@ import BoardRepositoryMemory from "../../src/infra/repositories/memory/BoardRepo
 describe("GetBoard", () => {
     test("deve obter um quadro", async () => {
         const boardRepository = new BoardRepositoryMemory()
-        const board = new Board(1, "A", "desc")
+        const board = new Board(1, "A")
         board.addColumn('todo', true)
         board.addColumn('doing', true)
         board.addColumn('done', false)
