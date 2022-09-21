@@ -13,8 +13,8 @@ export class Board {
         this.columns = []
     }
 
-    addColumn(name: string, hasEstimative: boolean){
-        this.columns.push(new Column(name, hasEstimative))
+    addColumn(column: Column){
+        this.columns.push(column)
     }
 
     getColumn(name: string) {
@@ -23,9 +23,9 @@ export class Board {
         return column
     }
 
-    addCard(columnName: string, cardName: string, estimative: number, date: Date = new Date()){
+    addCard(columnName: string, card: Card, date: Date = new Date()){
         const column = this.getColumn(columnName)
-        column.addCard(new Card(cardName, estimative), date)
+        column.addCard(card, date)
     }
 
     changeColumn(cardName: string, from: string, to: string, date: Date = new Date()){

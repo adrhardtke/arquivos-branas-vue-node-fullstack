@@ -2,7 +2,7 @@ import { Transition } from "./Transition"
 
 export class Card {
     transitions: Transition[]
-    constructor(readonly name: string, readonly estimative: number){
+    constructor(readonly idCard: number | null, readonly name: string, readonly estimative: number){
         this.transitions = []
     }
 
