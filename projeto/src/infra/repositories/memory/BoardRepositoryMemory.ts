@@ -1,4 +1,5 @@
 import { Board } from "../../../domain/entities/Board";
+import { Column } from "../../../domain/entities/Column";
 import BoardRepository from "../../../domain/repositories/BoardRepository";
 
 export default class BoardRepositoryMemory implements BoardRepository {
@@ -33,6 +34,11 @@ export default class BoardRepositoryMemory implements BoardRepository {
     }
     async list(): Promise<Board[]> {
         return this.boards
+    }
+
+    async getColumn(idColumn: number): Promise<Column> {
+        const column = await this.boards[0].columns[0]
+        return column
     }
     
 }

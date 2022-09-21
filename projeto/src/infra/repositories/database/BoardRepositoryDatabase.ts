@@ -60,4 +60,15 @@ export default class BoardRepositoryDatabase implements BoardRepository {
         return boards
     }
     
+    async getColumn(idColumn: number): Promise<Column> {
+        const [columnData] = await this.connection.query("select * from kanban.column where id_column = $1", [idColumn])
+        const column = new Column(columnData.id_column, columnData.name, columnData.has_estimative)
+        const cardsData = await this.connection.query("select * from kanban.card where id_column = $1",[column.idColumn])
+        for(const cardData of cardsData){
+            const card = new Card(cardData.id_card, cardData.title, cardData.estimative)
+            column.addCard(card, new Date())
+        }
+        
+        return column
+    }
 }

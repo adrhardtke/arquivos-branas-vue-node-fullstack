@@ -8,6 +8,7 @@ export default class GetBoard {
         if(!board) throw new Error("board not found")
         const output: Output = {
             idBoard: board.idBoard,
+            name: board.name,
             cards: []
         }
         for (const column of board.columns){
@@ -24,6 +25,7 @@ export default class GetBoard {
 
 type Output = {
     idBoard: number | null,
+    name: string,
     cards: {
         name: string,
         estimative: number

@@ -12,7 +12,7 @@ import BoardRepositoryDatabase from "../../src/infra/repositories/database/Board
 let connection: Connection
 let boardRepository: BoardRepository
 
-describe('BoardRepositoryDatabase', () => {
+describe.skip('BoardRepositoryDatabase', () => {
     beforeAll(async () => {
         connection = new PgPromiseConnection()
         boardRepository = new BoardRepositoryDatabase(connection)

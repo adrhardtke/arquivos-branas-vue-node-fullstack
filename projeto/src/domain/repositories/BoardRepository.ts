@@ -1,4 +1,5 @@
 import { Board } from "../entities/Board";
+import { Column } from "../entities/Column";
 
 export default interface BoardRepository {
     save (board: Board): Promise<number>
@@ -6,4 +7,5 @@ export default interface BoardRepository {
     update (board: Board): Promise<void>
     delete (idBoard: number): Promise<void>
     list (): Promise<Board[]>
+    getColumn (idColumn: number): Promise<Column>
 }

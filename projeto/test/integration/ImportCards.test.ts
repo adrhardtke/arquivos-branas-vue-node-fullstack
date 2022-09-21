@@ -13,7 +13,7 @@ import BoardRepositoryMemory from "../../src/infra/repositories/memory/BoardRepo
 let connection: Connection
 let boardRepository: BoardRepository
 
-describe("ImportCards", () => {
+describe.skip("ImportCards", () => {
     beforeAll(async () => {
         connection = new PgPromiseConnection()
         boardRepository = new BoardRepositoryDatabase(connection)

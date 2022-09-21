@@ -1,6 +1,6 @@
 import PgPromiseConnection from "../../src/infra/database/PgPromiseConnection";
 
-describe('Connection', () => {
+describe.skip('Connection', () => {
     test('should connect to database', async () => {
         const connection = new PgPromiseConnection()
         await connection.query("delete from kanban.card",[])

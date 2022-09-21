@@ -1,4 +1,4 @@
-import GetBoard from "../../src/application/GetBoard"
+import GetBoards from "../../src/application/GetBoards"
 import { Board } from "../../src/domain/entities/Board"
 import { Card } from "../../src/domain/entities/Card"
 import { Column } from "../../src/domain/entities/Column"
@@ -12,7 +12,7 @@ import BoardRepositoryMemory from "../../src/infra/repositories/memory/BoardRepo
 let connection: Connection
 let boardRepository: BoardRepository
 
-describe.skip("GetBoard", () => {
+describe.skip("GetBoards", () => {
     beforeAll(async () => {
         connection = new PgPromiseConnection()
         boardRepository = new BoardRepositoryDatabase(connection)
@@ -20,7 +20,7 @@ describe.skip("GetBoard", () => {
     afterAll(async () => {
         await connection.close()
     })
-    test("deve obter um quadro", async () => {
+    test.skip("deve obter os quadros", async () => {
         const boardRepository = new BoardRepositoryMemory()
         const board = new Board(1, "A")
         board.addColumn(new Column(null, 'todo', true))
@@ -29,25 +29,24 @@ describe.skip("GetBoard", () => {
         board.addCard("todo", new Card(null, "a",3))
         await boardRepository.save(board)
 
-        const getBoard = new GetBoard(boardRepository)
-        const getBoardOutput = await getBoard.execute(1)
-        const cards = getBoardOutput.cards
+        const getBoard = new GetBoards(boardRepository)
+        const getBoardOutput = await getBoard.execute()
+        const cards = getBoardOutput[0].cards
         expect(cards[0].name).toBe("a")
         expect(cards[0].estimative).toBe(3)
     })
-    test("deve obter um quadro usando database", async () => {
+    test("deve obter os quadro usando database", async () => {
         const board = new Board(null, "A")
         board.addColumn(new Column(null, 'todo', true))
         board.addColumn(new Column(null, 'doing', true))
         board.addColumn(new Column(null, 'done', false))
         board.addCard("todo", new Card(null, "a",3))
-        const idBoard = await boardRepository.save(board)
+        await boardRepository.save(board)
 
-        const getBoard = new GetBoard(boardRepository)
-        const getBoardOutput = await getBoard.execute(idBoard)
-        const cards = getBoardOutput.cards
-        expect(cards[0].name).toBe("a")
-        expect(cards[0].estimative).toBe(3)
-        await boardRepository.delete(idBoard)
+        const getBoards = new GetBoards(boardRepository)
+        const output = await getBoards.execute()
+        expect(output).toHaveLength(1)
+        if(!output[0].idBoard) return
+        await boardRepository.delete(output[0].idBoard)
     })
 })

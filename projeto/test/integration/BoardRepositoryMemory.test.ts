@@ -2,7 +2,7 @@ import { Board } from "../../src/domain/entities/Board"
 import { Column } from "../../src/domain/entities/Column"
 import BoardRepositoryMemory from "../../src/infra/repositories/memory/BoardRepositoryMemory"
 
-describe('BoardRepositoryMemory', () => {
+describe.skip('BoardRepositoryMemory', () => {
     it('deve salvar um board', async () => {
         const boardRepository = new BoardRepositoryMemory()
         const board = new Board(1, "A")
